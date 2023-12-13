@@ -1056,6 +1056,67 @@
             "$ref": "./examples/CallDialog_StopDialog.json"
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Update a dialog targeting a particular participant on the call.",
+        "description": "Update a dialog.",
+        "operationId": "CallDialog_UpdateDialog",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dialogId",
+            "in": "path",
+            "description": "The dialog id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "updateDialogRequest",
+            "in": "body",
+            "description": "The update dialog request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateDialogRequest"
+            }
+          },
+          {
+            "name": "operationCallbackUri",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "201": {
+            "description": "Returns the update dialog response.",
+            "schema": {
+              "$ref": "#/definitions/DialogStateResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CallDialog_UpdateDialog": {
+            "$ref": "./examples/CallDialog_UpdateDialog.json"
+          }
+        }
       }
     },
     "/calling/callConnections/{callConnectionId}/participants": {
@@ -1280,7 +1341,7 @@
               "$ref": "#/definitions/CommunicationErrorResponse"
             }
           },
-          "202": {
+          "200": {
             "description": "Returns the mute participants response",
             "schema": {
               "$ref": "#/definitions/MuteParticipantsResult"
@@ -1874,6 +1935,23 @@
           }
         }
       }
+    },
+    "AzureOpenAIDialogUpdate": {
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DialogUpdateBase"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/DialogInputType"
+        }
+      },
+      "x-ms-discriminator-value": "AzureOpenAI"
     },
     "CommunicationErrorResponse": {
       "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
@@ -2633,6 +2711,45 @@
           "type": "string"
         }
       }
+    },
+    "UpdateDialogRequest": {
+      "required": [
+        "dialog"
+      ],
+      "type": "object",
+      "properties": {
+        "dialog": {
+          "$ref": "#/definitions/DialogUpdateBase",
+          "description": "Dialog context."
+        },
+        "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "The value to identify context of the operation.",
+          "type": "string"
+        }
+      }
+    },
+    "DialogUpdateBase": {
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/DialogInputType"
+        },
+        "context": {
+          "description": "Dialog context.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      },
+      "discriminator": "kind"
     },
     "GetParticipantsResponse": {
       "description": "The response payload for getting participants of the call.",
