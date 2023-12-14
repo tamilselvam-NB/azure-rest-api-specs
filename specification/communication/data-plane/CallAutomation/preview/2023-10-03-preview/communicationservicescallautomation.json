@@ -1937,20 +1937,14 @@
       }
     },
     "AzureOpenAIDialogUpdate": {
-      "required": [
-        "kind"
-      ],
+      "required": [],
       "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DialogUpdateBase"
         }
       ],
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/DialogInputType"
-        }
-      },
+      "properties": {},
       "x-ms-discriminator-value": "AzureOpenAI"
     },
     "CommunicationErrorResponse": {
