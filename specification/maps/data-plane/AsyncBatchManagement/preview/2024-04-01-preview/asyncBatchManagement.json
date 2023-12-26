@@ -5,7 +5,14 @@
     "version": "2024-04-01-preview",
     "description": "Azure Maps Asynchronous Batch Management REST APIs"
   },
-  "host": "atlas.microsoft.com",
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{geography}.atlas.microsoft.com",
+    "parameters": [
+      {
+        "$ref": "../../../Common/stable/2023-06-01/common.json#/parameters/GeographicResourceLocation"
+      }
+    ]
+  },
   "schemes": [
     "https"
   ],
@@ -63,8 +70,9 @@
     },
     "OperationId": {
       "name": "operationId",
+      "description": "System generated unique identifier for the asynchronous batch operation after it has been submitted.",
       "type": "string",
-      "format": "uri",
+      "format": "uuid",
       "in": "path",
       "required": true
     }
@@ -73,7 +81,7 @@
     "/asyncBatch/operations/{operationId}": {
       "get": {
         "description": "Get the status of a specific asynchronous batch operation by its operation ID.",
-        "operationId": "AsyncBatch_GetSpecificOperation",
+        "operationId": "AsynchronousBatchManagement_GetSpecificOperation",
         "produces": [
           "application/json"
         ],
@@ -122,7 +130,7 @@
     "/asyncBatch/operations": {
       "get": {
         "description": "List the status of all asynchronous batch operations available to the user.",
-        "operationId": "AsyncBatch_ListAllOperations",
+        "operationId": "AsynchronousBatchManagement_ListAllOperations",
         "x-ms-examples": {
           "Get operations with various status": {
             "$ref": "./examples/GetOperations.json"
@@ -176,15 +184,15 @@
             "values": [
               {
                 "value": "Geocode",
-                "description": "Forward geocode asynchronous batch job"
+                "description": "Forward geocode asynchronous batch job."
               },
               {
                 "value": "ReverseGeocode",
-                "description": "Reverse geocode asynchronous batch job"
+                "description": "Reverse geocode asynchronous batch job."
               },
               {
                 "value": "RouteDirections",
-                "description": "Route directions asynchronous batch job"
+                "description": "Route directions asynchronous batch job."
               }
             ]
           }
@@ -260,7 +268,8 @@
         },
         "outputBlobUrl": {
           "type": "string",
-          "format": "uri"
+          "format": "uri",
+          "description": "URL to the output blob containing the batch results."
         },
         "error": {
           "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail"
@@ -281,7 +290,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The is the link to the next page of the features returned. If it's the last page, no this field."
+          "description": "The is the link to the next page of the features returned. If it's the last page, this is null."
         }
       }
     }
