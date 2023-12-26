@@ -1,5 +1,6 @@
 {
   "parameters": {
+    "geography": "us",
     "api-version": "2024-04-01-preview",
     "operationId": "123e4567-e89b-12d3-a456-426614174003"
   },
@@ -17,8 +18,8 @@
         "percentComplete": 100,
         "totalItemCount": 1000,
         "error": {
-          "code": "ErrorCode",
-          "message": "Error message detailing the reason for failure."
+          "code": "ModifiedInputBlob",
+          "message": "The input blob was modified after the operation started."
         }
       }
     }

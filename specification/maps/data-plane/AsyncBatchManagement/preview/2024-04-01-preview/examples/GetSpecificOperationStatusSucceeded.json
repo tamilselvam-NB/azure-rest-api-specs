@@ -1,5 +1,6 @@
 {
   "parameters": {
+    "geography": "us",
     "api-version": "2024-04-01-preview",
     "operationId": "123e4567-e89b-12d3-a456-426614174002"
   },
@@ -7,8 +8,8 @@
     "200": {
       "body": {
         "operationId": "123e4567-e89b-12d3-a456-426614174002",
-        "operationType": "Geocode",
-        "inputBlobUrl": "https://examplestorage.blob.core.windows.net/asyncbatch/geocodingBatchItems.json",
+        "operationType": "RouteDirections",
+        "inputBlobUrl": "https://examplestorage.blob.core.windows.net/asyncbatch/routeDirectionsBatchItems.json",
         "linkedResource": "async-batch-results",
         "msiClientId": "87654321-abcd-1234-efgh-12345678ijkl",
         "createdDateTime": "2023-01-01T00:00:00Z",
@@ -16,7 +17,7 @@
         "status": "Succeeded",
         "percentComplete": 100,
         "totalItemCount": 1000,
-        "outputBlobUrl": "https://examplestorage.blob.core.windows.net/asyncbatch/geocodingBatchResults.json"
+        "outputBlobUrl": "https://examplestorage.blob.core.windows.net/AzureMapsBatch/RouteDirections/123e4567-e89b-12d3-a456-426614174002.json"
       }
     }
   }
