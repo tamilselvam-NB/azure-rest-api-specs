@@ -57,11 +57,14 @@
       "type": "string",
       "in": "query",
       "required": true,
+      "maxLength": 20,
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}(-preview)?$",
       "x-ms-parameter-location": "client"
     },
     "OperationId": {
       "name": "operationId",
       "type": "string",
+      "format": "uri",
       "in": "path",
       "required": true
     }
@@ -118,8 +121,8 @@
     },
     "/asyncBatch/operations": {
       "get": {
-        "description": "Get the status of all asynchronous batch operations available to the user.",
-        "operationId": "AsyncBatch_GetAllOperations",
+        "description": "List the status of all asynchronous batch operations available to the user.",
+        "operationId": "AsyncBatch_ListAllOperations",
         "x-ms-examples": {
           "Get operations with various status": {
             "$ref": "./examples/GetOperations.json"
@@ -143,6 +146,9 @@
           "default": {
             "$ref": "../../../Common/stable/2023-06-01/common.json#/responses/default"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -197,19 +203,22 @@
         },
         "createdDateTime": {
           "type": "string",
+          "format": "date-time",
           "description": "Client ID of a user-assigned managed identity. This is used for authentication and authorization purposes. If the managed identity is system-assigned, this field can be null."
-
         },
         "lastActionDateTime": {
           "type": "string",
+          "format": "date-time",
           "description": "Timestamp when the operation was created."
         },
         "percentComplete": {
           "type": "integer",
+          "format": "int32",
           "description": "Percentage indicating the completion status of the operation."
         },
         "totalItemCount": {
           "type": "integer",
+          "format": "int32",
           "description": "Total number of items in the batch operation."
         },
         "status": {
@@ -249,6 +258,10 @@
             ]
           }
         },
+        "outputBlobUrl": {
+          "type": "string",
+          "format": "uri"
+        },
         "error": {
           "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail"
         }
@@ -267,6 +280,7 @@
         },
         "nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "The is the link to the next page of the features returned. If it's the last page, no this field."
         }
       }
