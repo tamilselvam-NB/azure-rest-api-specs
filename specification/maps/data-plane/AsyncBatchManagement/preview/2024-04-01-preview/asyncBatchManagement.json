@@ -125,7 +125,17 @@
             }
           },
           "default": {
-            "$ref": "../../../Common/stable/2023-06-01/common.json#/responses/default"
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../Common/stable/2023-06-01/common.json#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code of the error that occurred."
+              }
+            },
+            "x-ms-error-response": true
           }
         }
       }
@@ -155,7 +165,17 @@
             }
           },
           "default": {
-            "$ref": "../../../Common/stable/2023-06-01/common.json#/responses/default"
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../Common/stable/2023-06-01/common.json#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code of the error that occurred."
+              }
+            },
+            "x-ms-error-response": true
           }
         },
         "x-ms-pageable": {
