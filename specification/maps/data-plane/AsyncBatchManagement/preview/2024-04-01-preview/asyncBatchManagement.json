@@ -277,7 +277,18 @@
         "error": {
           "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail"
         }
-      }
+      },
+      "required": [
+        "operationId",
+        "operationType",
+        "inputBlobUrl",
+        "linkedResource",
+        "createdDateTime",
+        "lastActionDateTime",
+        "percentComplete",
+        "totalItemCount",
+        "status"
+      ]
     },
     "AsyncBatchOperationsList": {
       "description": "This object is returned from a successful Get Specific Operations request.",
@@ -295,7 +306,10 @@
           "format": "uri",
           "description": "The is the link to the next page of the features returned. If it's the last page, this is null."
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     }
   }
 }

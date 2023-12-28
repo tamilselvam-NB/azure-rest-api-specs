@@ -118,7 +118,7 @@
           "default": {
             "description": "An unexpected error occurred.",
             "schema": {
-              "$ref": "../../../Common/preview/1.0/common.json#/definitions/MapsErrorResponse"
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -180,7 +180,7 @@
           "default": {
             "description": "An unexpected error occurred.",
             "schema": {
-              "$ref": "../../../Common/preview/1.0/common.json#/definitions/MapsErrorResponse"
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -232,6 +232,19 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code of the error that occurred."
+              }
+            },
+            "x-ms-error-response": true
           }
         }
       }
@@ -2048,6 +2061,7 @@
     },
     "AsyncBatchRequestBody": {
       "type": "object",
+      "description": "Universal asynchronous batch request body.",
       "properties": {
         "inputBlobUrl": {
           "description": "URL to the input blob containing the batch of queries. This should be a valid URL pointing to a blob storage where the batch data is stored.",
