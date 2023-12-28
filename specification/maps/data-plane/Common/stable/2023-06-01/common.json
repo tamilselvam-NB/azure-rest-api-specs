@@ -101,11 +101,13 @@
             "successfulRequests": {
               "description": "Number of successful requests in the batch",
               "type": "integer",
+              "format": "int32",
               "readOnly": true
             },
             "totalRequests": {
               "description": "Total number of requests in the batch",
               "type": "integer",
+              "format": "int32",
               "readOnly": true
             }
           }
@@ -119,6 +121,7 @@
         "statusCode": {
           "description": "HTTP request status code.",
           "type": "integer",
+          "format": "int32",
           "readOnly": true,
           "example": 200
         }
