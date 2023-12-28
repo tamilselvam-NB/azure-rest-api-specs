@@ -474,7 +474,7 @@
             "description": "The request body for geocoding asynchronous batch request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/GeocodingAsyncBatchRequestBody"
+              "$ref": "#/definitions/AsyncBatchRequestBody"
             }
           }
         ],
@@ -649,6 +649,49 @@
           }
         }
       }
+    },
+    "/reverseGeocode:asyncBatch": {
+      "post": {
+        "description": "**Reverse Geocoding Asynchronous Batch API**\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Reverse Geocoding Async Batch API is designed for processing large batches of reverse geocoding queries asynchronously. Unlike the synchronous version, this API is optimized for handling high-volume batch requests without the constraints of immediate response times, making it suitable for extensive geocoding operations. After submitting your batch request, the service processes the queries in the background. You can periodically check the status of the request and retrieve the results once they are ready. This approach is beneficial for applications that do not require immediate responses and can accommodate longer processing times.\n\n### Submit Asynchronous Batch Request\nTo submit a request, you'll need to provide a URL (`inputBlobUrl`) pointing to a blob storage containing your batch of geocoding queries. The format of the data within this blob should be the same as that used for the synchronous batch version. Additionally, you must specify a `linkedResource`, which is a preconfigured destination in the control plane where the batch results will be stored upon completion. You also have the option to specify a `msiClientId`, which is the Client ID of a user-assigned managed identity, used for authentication and authorization of both `inputBlobUrl` and `linkedResource`. If the managed identity is system-assigned, this field can be left null.",
+        "operationId": "Search_SubmitReverseGeocodingAsynchronousBatch",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Submit an asynchronous batch job for reverse geocoding": {
+            "$ref": "./examples/ReverseGeocodingAsyncBatch.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/stable/2023-06-01/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/Accept-Language"
+          },
+          {
+            "name": "reverseGeocodingAsyncBatchRequestBody",
+            "in": "body",
+            "description": "The request body for reverse geocoding asynchronous batch request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AsyncBatchRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Operation-Location": {
+                "description": "URL to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -810,7 +853,7 @@
         }
       }
     },
-    "GeocodingAsyncBatchRequestBody": {
+    "AsyncBatchRequestBody": {
       "type": "object",
       "properties": {
         "inputBlobUrl": {
